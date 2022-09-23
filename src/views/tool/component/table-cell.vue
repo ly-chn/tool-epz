@@ -3,7 +3,8 @@
     <input
         v-if="editing"
         v-model="value"
-        @vnode-mounted="({ el }) => el.focus()">
+        @blur="editing = false"
+        @vnode-mounted="({ el }) => el.focus()"/>
     <span v-else>{{ value }}</span>
   </div>
 </template>
@@ -29,6 +30,5 @@ const value = computed({
 .cell{
   width: 160px;
   height: 24px;
-  border: 1px solid red;
 }
 </style>

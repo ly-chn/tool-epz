@@ -6,8 +6,8 @@
       <table>
         <tr v-for="(row, rowIndex) in cellMap" :key="rowIndex">
           <th v-for="(cell, colIndex) in row" :key="colIndex">
-            <!--<table-cell v-model="cellMap[rowIndex][colIndex]"/>-->
-            hi this is text
+            <table-cell v-model="cellMap[rowIndex][colIndex]"/>
+            <!--hi this is text-->
           </th>
         </tr>
       </table>
@@ -38,10 +38,10 @@ table {
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 10px;
-  border: solid 2px #dfdfdf;
+  border: solid 2px #1E90FF;
 }
 td, th {
-  border-right: 2px solid #1E90FF;
+  border: 2px solid #1E90FF;
   height: 30px;
   text-align: center;
 }
