@@ -1,7 +1,6 @@
 <template>
   <div>
-    rows: <input v-model="rows" type="number">
-    cols: <input v-model="cols" type="number">
+
     <div>
       <table>
         <tr>
@@ -47,6 +46,8 @@
 <script lang="ts" setup>
 import {ref, watchEffect} from 'vue'
 import TableCell from '/@/views/tool/component/table-cell.vue'
+import LyForm from '/@/components/form/form/ly-form.vue'
+import LyInput from '/@/components/form/form-item/ly-input.vue'
 
 const rows = ref(10)
 const cols = ref(10)

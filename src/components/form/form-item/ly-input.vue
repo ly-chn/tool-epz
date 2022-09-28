@@ -1,0 +1,78 @@
+<script lang="ts">
+import {computed, defineComponent, inject} from 'vue'
+export default defineComponent({
+  name: 'LyInput',
+  props: {
+    /**
+     * 标签文本
+     */
+    label: String,
+    /**
+     * 表单验证规则
+     */
+    rules: {
+      type: [Array, Function, Object]
+    },
+    /**
+     * 为true时，表单不可编辑
+     */
+    disabled: Boolean,
+    value: null,
+    /**
+     * 原生属性，最大输入长度
+     */
+    maxlength: Number,
+    /**
+     * 原生属性，最小输入长度
+     */
+    minlength: Number,
+    /**
+     * 为true表示只读
+     */
+    readonly: Boolean,
+    /**
+     * 是否显示切换密码图标
+     */
+    showPassword: Boolean,
+    /**
+     * 输入框头部图标
+     */
+    prefixIcon: String,
+    /**
+     * 输入框尾部图标
+     */
+    suffixIcon: String,
+    placeholder: String
+  },
+  emits: ['update:modelValue'],
+  setup(props, {emit}) {
+    const formItemInstance = inject('formItemInstance', undefined) as any
+    const formInstance = inject('formInstance', undefined) as any
+    const disabledItem = computed(() => props.disabled || formItemInstance?.disabled || formInstance?.disabled)
+    const usefulRules = computed(() => [].concat(props.rules as [], formItemInstance?.rules)
+      .filter(it => !!it).map(it => typeof it === 'function' ? (it as () => object)() : it))
+    const usefulLabel = computed(() => {
+      console.log('up: ', props.label || formItemInstance?.label)
+      return props.label || formItemInstance?.label
+    })
+    const usefulSpan = computed(() => formItemInstance?.colSpan)
+    const setCurrentValue = (value: any) => {
+      emit('update:modelValue', value)
+    }
+    return {disabledItem, usefulRules, usefulLabel, usefulSpan, setCurrentValue}
+  }
+})
+</script>
+<template>
+  <ly-form-item :label="usefulLabel" :rules="usefulRules">
+    <el-input :disabled="disabled"
+              :maxlength="maxlength"
+              :minlength="minlength"
+              :placeholder="placeholder"
+              :readonly="readonly"
+              :show-password="showPassword"
+              :show-word-limit="Boolean(maxlength)"
+              :value="value"
+              @input="setCurrentValue"/>
+  </ly-form-item>
+</template>
