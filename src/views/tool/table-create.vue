@@ -32,29 +32,25 @@ watchEffect(() => {
   cellMap.value = new Array(rows.value).fill(1).map(() => new Array(cols.value).map(() => ''))
 })
 </script>
-<style scoped>
-table {
-  border-collapse: collapse;
-  width: 100%;
-  border-radius: 20px;
-}
+<style scoped lang="sass">
+table
+  border-collapse: collapse
+  width: 100%
+  border-radius: 20px
 
-table::after {
-  content: " ";
-  inset: 0;
-  border: solid #000 1px;
-  position: absolute;
-  z-index: -100;
-  border-radius: v-bind(borderRadius);
-}
+table::after
+  content: " "
+  inset: 0
+  border: solid #000 1px
+  position: absolute
+  z-index: -100
+  border-radius: v-bind(borderRadius)
 
-tr:not(:last-child) {
+tr:not(:last-child)
   border-bottom: solid #000 1px
-}
 
-td, th {
-  text-align: left;
-  padding: 8px;
-  border: 1px solid red;
-}
+td, th
+  text-align: left
+  padding: 8px
+  border: 1px solid red
 </style>
