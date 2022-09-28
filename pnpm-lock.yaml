@@ -19,6 +19,7 @@ specifiers:
   vite: ^3.0.4
   vite-plugin-eslint: ^1.8.0
   vue: ^3.2.37
+  vue-contenteditable: ^4.0.4
   vue-router: '4'
   vue-tsc: ^0.39.4
   vue-types: ^4.2.1
@@ -32,6 +33,7 @@ dependencies:
   unplugin-vue-components: 0.22.4_vite@3.0.7+vue@3.2.37
   vite-plugin-eslint: 1.8.0_eslint@8.21.0+vite@3.0.7
   vue: 3.2.37
+  vue-contenteditable: 4.0.4_vue@3.2.37
   vue-router: 4.1.3_vue@3.2.37
   vue-types: 4.2.1_vue@3.2.37
 
@@ -43,7 +45,7 @@ devDependencies:
   eslint-plugin-vue: 9.3.0_eslint@8.21.0
   postcss: 8.4.14
   sass: 1.54.0
-  tailwindcss: 3.1.6
+  tailwindcss: 3.1.6_postcss@8.4.14
   typescript: 4.7.4
   vite: 3.0.7_sass@1.54.0
   vue-tsc: 0.39.5_typescript@4.7.4
@@ -2194,10 +2196,12 @@ packages:
     resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
     dev: false
 
-  /tailwindcss/3.1.6:
+  /tailwindcss/3.1.6_postcss@8.4.14:
     resolution: {integrity: sha512-7skAOY56erZAFQssT1xkpk+kWt2NrO45kORlxFPXUt3CiGsVPhH1smuH5XoDH6sGPXLyBv+zgCKA2HWBsgCytg==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -2429,6 +2433,14 @@ packages:
       sass: 1.54.0
     optionalDependencies:
       fsevents: 2.3.2
+
+  /vue-contenteditable/4.0.4_vue@3.2.37:
+    resolution: {integrity: sha512-v29iTxGyhReWsnSyi5geFf/S1vuI+HxOt90vtAn3BlhIuIsAqsjMqsjA1LHNpYhxBTpvoLXdDCye4Gzu26uGGQ==}
+    peerDependencies:
+      vue: ^3.2.25
+    dependencies:
+      vue: 3.2.37
+    dev: false
 
   /vue-demi/0.13.6_vue@3.2.37:
     resolution: {integrity: sha512-02NYpxgyGE2kKGegRPYlNQSL1UWfA/+JqvzhGCOYjhfbLWXU5QQX0+9pAm/R2sCOPKr5NBxVIab7fvFU0B1RxQ==}
