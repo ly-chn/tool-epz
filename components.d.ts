@@ -16,7 +16,6 @@ declare module '@vue/runtime-core' {
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
-    LyColorPicker: typeof import('./src/components/special/ly-color-picker.vue')['default']
     LyDivider: typeof import('./src/components/special/ly-divider.vue')['default']
     LyForm: typeof import('./src/components/form/form/ly-form.vue')['default']
     LyFormItem: typeof import('./src/components/form/form-item/ly-form-item.vue')['default']

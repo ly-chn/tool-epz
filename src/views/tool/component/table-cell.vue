@@ -1,16 +1,18 @@
 <template>
-  <div :title="value" class="cell inline-block" @click="editing = true">
-    <input
-        v-if="editing"
-        v-model="value"
-        @blur="editing = false"
-        @vnode-mounted="({ el }) => el.focus()"/>
-    <span v-else>{{ value }}</span>
-  </div>
+  <content-editable v-model="value"
+                    :contenteditable="editing"
+                    :no-html="false"
+                    :no-nl="true"
+                    :title="value"
+                    class="w-full h-full inline-block cell"
+                    tag="div"
+                    @blur="editing = false"
+                    @click="handleClick" />
 </template>
 
 <script lang="ts" setup>
-import {computed, ref} from 'vue'
+import {computed, nextTick, ref} from 'vue'
+import ContentEditable from 'vue-contenteditable'
 
 const editing = ref(false)
 const props = defineProps({
@@ -25,10 +27,17 @@ const value = computed({
     emits('update:modelValue', value)
   }
 })
+
+function handleClick(e: MouseEvent) {
+  editing.value = true
+  nextTick(()=>{
+    (e.target as HTMLElement).focus()
+  })
+}
 </script>
 <style scoped>
-.cell{
-  width: 160px;
-  height: 24px;
+.cell {
+  min-width: 160px;
+  min-height: 24px;
 }
 </style>
