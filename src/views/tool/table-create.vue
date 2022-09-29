@@ -56,7 +56,7 @@ table::after
   inset: 0
   border: solid v-bind(borderColor) v-bind(usefulBorderWidth)
   position: absolute
-  z-index: -100
+  pointer-events: none
   border-radius: v-bind(usefulBorderRadius)
 
 table tr:is(:first-child)
