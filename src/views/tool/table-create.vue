@@ -6,6 +6,7 @@
       <ly-input label="行数" v-model="rows" />
       <ly-divider>样式</ly-divider>
       <ly-input label="圆角" v-model="radian" />
+      <ly-input label="边框宽度" v-model="borderWidth" />
       <ly-form-item label="边框颜色">
         <input v-model="borderColor" type="color">
       </ly-form-item>
@@ -30,19 +31,22 @@ import {computed, ref, watch} from 'vue'
 import TableCell from '/@/views/tool/component/table-cell.vue'
 import LyDivider from '/@/components/special/ly-divider.vue'
 
-// 行,列,圆角
-const rows = ref(10)
-const cols = ref(10)
+// 行,列
+const rows = ref(3)
+const cols = ref(3)
 const cellMap = ref([['']])
 watch([rows, cols], ([rows, cols]) => {
-  cellMap.value = new Array(rows).fill(1).map(() => new Array(cols).fill(1).map(() => ''))
+  cellMap.value = Array.from({length: rows}, () => Array.from({length: cols}, () => ''))
+  // cellMap.value = new Array(rows).fill(1).map(() => new Array(cols).fill(1).map(() => ''))
 }, {immediate: true})
 
-
+// 圆角, 背景色, 边框颜色, 首行背景色
 const radian = ref(20)
+const borderWidth = ref(1)
 const borderColor = ref('#000')
-const tableHeaderColor = ref('#000')
-const borderRadius = computed(() => `${radian.value}px`)
+const tableHeaderColor = ref('')
+const usefulBorderRadius = computed(() => `${radian.value}px`)
+const usefulBorderWidth = computed(() => `${borderWidth.value}px`)
 
 
 </script>
@@ -50,20 +54,36 @@ const borderRadius = computed(() => `${radian.value}px`)
 table::after
   content: " "
   inset: 0
-  border: solid v-bind(borderColor) 1px
+  border: solid v-bind(borderColor) v-bind(usefulBorderWidth)
   position: absolute
   z-index: -100
-  border-radius: v-bind(borderRadius)
+  border-radius: v-bind(usefulBorderRadius)
 
 table tr:is(:first-child)
-  background-color: v-bind(tableHeaderColor)
+  // 首行背景色
+  td
+    background-color: v-bind(tableHeaderColor)
+  // 左上
+  td:is(:first-child)
+    border-top-left-radius: v-bind(usefulBorderRadius)
+  // 右上
+  td:is(:last-child)
+    border-top-right-radius: v-bind(usefulBorderRadius)
+
+table tr:is(:last-child)
+  // 左下
+  td:is(:first-child)
+    border-bottom-left-radius: v-bind(usefulBorderRadius)
+  // 右下
+  td:is(:last-child)
+    border-bottom-right-radius: v-bind(usefulBorderRadius)
 
 tr:not(:last-child)
-  border-bottom: solid v-bind(borderColor) 1px
+  border-bottom: solid v-bind(borderColor) v-bind(usefulBorderWidth)
 
 td:not(:last-child)
   text-align: left
   padding: 8px
-  border-right: 1px solid v-bind(borderColor)
+  border-right: v-bind(usefulBorderWidth) solid v-bind(borderColor)
 
 </style>
